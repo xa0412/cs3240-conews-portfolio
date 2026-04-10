@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoNews — Individual Portfolio | Xiao Ao</title>
+  <style>
+    /* ── Reset & Base ───────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:        #0f1117;
+      --surface:   #1a1d27;
+      --card:      #22263a;
+      --accent:    #4f8ef7;
+      --accent2:   #38d9a9;
+      --text:      #e8eaf6;
+      --muted:     #8892b0;
+      --border:    #2e3350;
+      --warn:      #ffd166;   /* placeholder highlight */
+      --radius:    12px;
+      --max-w:     900px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; border-radius: var(--radius); }
+
+    /* ── Layout helpers ─────────────────────────────── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    section { padding: 72px 0 48px; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+
+    /* ── Placeholder style ──────────────────────────── */
+    .ph {
+      background: rgba(255, 209, 102, 0.12);
+      border: 1.5px dashed var(--warn);
+      border-radius: 8px;
+      padding: 14px 18px;
+      color: var(--warn);
+      font-size: 13px;
+      margin: 12px 0;
+    }
+    .ph strong { display: block; margin-bottom: 4px; font-size: 14px; }
+
+    /* ── Navigation ─────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15, 17, 23, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    }
+    .nav-brand { font-weight: 700; font-size: 16px; color: var(--accent2); }
+    .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted); font-size: 13px; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* ── Hero ───────────────────────────────────────── */
+    .hero {
+      padding: 96px 0 80px;
+      background: linear-gradient(160deg, #141828 0%, #0f1117 60%);
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(79, 142, 247, 0.15);
+      border: 1px solid rgba(79, 142, 247, 0.4);
+      color: var(--accent);
+      font-size: 12px; font-weight: 600;
+      padding: 4px 12px; border-radius: 20px;
+      letter-spacing: .05em; margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(32px, 6vw, 52px); font-weight: 800; line-height: 1.15; }
+    .hero h1 span { color: var(--accent2); }
+    .hero-sub {
+      margin-top: 16px;
+      color: var(--muted); font-size: 16px; max-width: 560px;
+    }
+    .hero-meta {
+      margin-top: 28px;
+      display: flex; flex-wrap: wrap; gap: 24px;
+    }
+    .hero-meta-item { font-size: 13px; color: var(--muted); }
+    .hero-meta-item strong { color: var(--text); display: block; }
+    .hero-links {
+      margin-top: 32px;
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 20px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn:hover { opacity: .85; transform: translateY(-1px); text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+
+    /* ── Section headers ────────────────────────────── */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      color: var(--accent2); text-transform: uppercase; margin-bottom: 10px;
+    }
+    h2 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+    h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; color: var(--accent); }
+    h4 { font-size: 14px; font-weight: 600; color: var(--accent2); margin-bottom: 4px; }
+    p { color: var(--muted); margin-bottom: 12px; }
+    p strong { color: var(--text); }
+    ul, ol { padding-left: 20px; color: var(--muted); }
+    li { margin-bottom: 4px; }
+
+    /* ── Cards / Grid ───────────────────────────────── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+    }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
+
+    /* ── Tag pills ──────────────────────────────────── */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag {
+      background: rgba(79, 142, 247, 0.1);
+      border: 1px solid rgba(79, 142, 247, 0.3);
+      color: var(--accent);
+      font-size: 12px; padding: 3px 10px; border-radius: 20px;
+    }
+    .tag-green {
+      background: rgba(56, 217, 169, 0.1);
+      border-color: rgba(56, 217, 169, 0.3);
+      color: var(--accent2);
+    }
+
+    /* ── Task flow strip ────────────────────────────── */
+    .task-flow {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 16px 0;
+    }
+    .task-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px; color: var(--text);
+    }
+    .task-arrow { color: var(--muted); font-size: 16px; }
+
+    /* ── Wireframe placeholder box ──────────────────── */
+    .wireframe-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      min-height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 13px; text-align: center;
+      padding: 16px;
+    }
+
+    /* ── Timeline ───────────────────────────────────── */
+    .timeline { margin-top: 20px; }
+    .timeline-item {
+      display: flex; gap: 18px; margin-bottom: 24px;
+    }
+    .timeline-dot {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: #fff;
+      margin-top: 2px;
+    }
+    .timeline-content { flex: 1; }
+
+    /* ── Integration diagram ────────────────────────── */
+    .integration-row {
+      display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;
+    }
+    .int-from, .int-to {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 14px;
+      font-size: 13px; font-weight: 600; white-space: nowrap;
+    }
+    .int-from { color: var(--accent2); border-color: rgba(56,217,169,.4); }
+    .int-to   { color: var(--accent);  border-color: rgba(79,142,247,.4); }
+    .int-arrow { color: var(--muted); align-self: center; font-size: 18px; }
+    .int-desc  { color: var(--muted); font-size: 13px; align-self: center; }
+
+    /* ── AI feature card ────────────────────────────── */
+    .ai-card {
+      background: linear-gradient(135deg, rgba(79,142,247,.08), rgba(56,217,169,.08));
+      border: 1px solid rgba(79,142,247,.3);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    /* ── Quote block ────────────────────────────────── */
+    blockquote {
+      border-left: 3px solid var(--accent2);
+      padding: 10px 18px;
+      margin: 16px 0;
+      color: var(--muted);
+      font-style: italic;
+      background: rgba(56,217,169,.05);
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* ── Footer ─────────────────────────────────────── */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero { padding: 60px 0 48px; }
+      section { padding: 48px 0 32px; }
+      h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-brand">PropBank · CoNews</span>
+    <div class="nav-links">
+      <a href="#overview">01 · Overview</a>
+      <a href="#research">02 · Research</a>
+      <a href="#tasks">03 · Tasks</a>
+      <a href="#prototype">04 · Prototype</a>
+      <a href="#integration">05 · Integration</a>
+      <a href="#ai">06 · AI Feature</a>
+      <a href="#reflection">07 · Reflection</a>
+      <a href="#links">08 · Links</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-badge">CS3240 · IDP Final Submission · Individual Portfolio</div>
+    <h1><span>CoNews</span><br>Event Discovery Service</h1>
+    <p class="hero-sub">
+      A service within <strong>PropBank</strong> that helps ACGN community members discover, track,
+      and attend conventions and events in Singapore — from browsing to ticket purchase in one flow.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <strong>Student</strong>Xiao Ao
+      </div>
+      <div class="hero-meta-item">
+        <strong>Group</strong>Group 11 · Tutorial 06
+      </div>
+      <div class="hero-meta-item">
+        <strong>Super-app Name</strong>PropBank
+      </div>
+    </div>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="https://www.figma.com/proto/Rb3NBiOCgCPaXdcylqQa3L/Propbank-playground?node-id=426-416&p=f&scaling=scale-down&content-scaling=fixed&page-id=97%3A307&starting-point-node-id=426%3A416" target="_blank">▶ View Hi-Fi Prototype</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     1. SERVICE OVERVIEW
+════════════════════════════════════════════════════ -->
+<section id="overview">
+  <div class="container">
+    <div class="section-label">01 · Service Overview</div>
+    <h2>What is CoNews?</h2>
+    <p>
+      CoNews is the <strong>event discovery and management service</strong> within PropBank.
+      It addresses a core problem identified during user research: ACGN event information is
+      scattered across Instagram, Telegram, Facebook event pages, and word-of-mouth, making it
+      easy to miss smaller community conventions.
+    </p>
+    <p>
+      CoNews provides a centralised, filterable event feed with rich detail pages, integrated ticket
+      purchase, directions, and reminders, all within the PropBank ecosystem so users can move
+      seamlessly to related services (Marketplace, Workshops, CreatorHub, PropScan) without leaving the app.
+    </p>
+
+    <!-- Problem Statement -->
+    <h3 style="margin-top:32px;">Problem Statement</h3>
+    <div class="card">
+      <p style="margin:0; color: var(--text);">
+        ACGN community members in Singapore <strong>struggle to discover upcoming conventions and
+        smaller community events</strong> because information is fragmented across multiple external
+        platforms, leading to missed events and a disjointed pre-event planning experience.
+      </p>
+    </div>
+
+    <!-- Service features -->
+    <h3 style="margin-top:28px;">Core Features</h3>
+    <div class="grid-3">
+      <div class="card">
+        <h4>Event Discovery</h4>
+        <p style="margin:0; font-size:13px;">Browsable, filterable feed — event price, event type, date, location</p>
+      </div>
+      <div class="card">
+        <h4>Event Detail Page</h4>
+        <p style="margin:0; font-size:13px;">Full info: name, date/time, venue, booths, artist guests, short summary</p>
+      </div>
+      <div class="card">
+        <h4>Ticket Purchase</h4>
+        <p style="margin:0; font-size:13px;">In-app integrated ticket buying with payment and stored ticket wallet</p>
+      </div>
+      <div class="card">
+        <h4>Directions & Map</h4>
+        <p style="margin:0; font-size:13px;">Event venue directions and an in-event map showing booth layouts</p>
+      </div>
+      <div class="card">
+        <h4>Guests & Participants</h4>
+        <p style="margin:0; font-size:13px;">See who is attending — guests, artists, featured cosplayers</p>
+      </div>
+      <div class="card">
+        <h4>Save, Share & Remind</h4>
+        <p style="margin:0; font-size:13px;">Bookmark events, share with friends, set personalised reminders</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     2. USER RESEARCH & PERSONA
+════════════════════════════════════════════════════ -->
+<section id="research">
+  <div class="container">
+    <div class="section-label">02 · User Research</div>
+    <h2>Understanding the Event Seeker</h2>
+
+    <!-- Group research summary -->
+    <h3>Group-level Research (Informing CoNews)</h3>
+    <p>
+      The group conducted <strong>semi-structured interviews with 3 participants</strong> who had
+      cosplayed or attended a convention within the past 2 years. The goal was to understand
+      current workflows, pain points, and needs across the full PropBank ecosystem.
+    </p>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <h4>Key Insight for CoNews</h4>
+      <p style="margin-bottom: 8px; color: var(--text);">
+        <strong>Event discovery is fragmented and dependent on external channels.</strong>
+      </p>
+      <p style="margin: 0; font-size: 13px;">
+        The most recurring pain point: no reliable, centralised way to discover conventions -
+        especially smaller ACGN events. Users rely on Instagram stories, Telegram group chats,
+        and friends to find out about events.
+      </p>
+      <div class="tags" style="margin-top: 12px;">
+        <span class="tag-green tag">Event Tracking</span>
+        <span class="tag-green tag">Finding Friends at a Convention</span>
+        <span class="tag-green tag">Live Crowds</span>
+        <span class="tag-green tag">Reminders</span>
+      </div>
+    </div>
+
+    <blockquote>
+      "I only found out about [smaller con] two days before because my friend happened to post about it."
+      <br><em style="font-size: 12px;">— Interview participant </em>
+    </blockquote>
+
+    <!-- CoNews Persona -->
+    <h3 style="margin-top: 32px;">Service-Level Persona — The Event Seeker</h3>
+    <div class="card">
+      <!-- Persona FigJam embed -->
+      <iframe style="border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 6px; width: 100%; margin-bottom: 8px;" height="450" src="https://embed.figma.com/board/DJ6j2odtzl0O2O6jIWjYoe/CS3240-user-journey-map?node-id=2206-652&embed-host=share" allowfullscreen></iframe>
+      <a href="https://www.figma.com/board/DJ6j2odtzl0O2O6jIWjYoe/CS3240-user-journey-map?node-id=2206-652" target="_blank" style="font-size: 12px; display: inline-block; margin-bottom: 20px;">View Event Seeker Persona in FigJam ↗</a>
+
+      <div class="grid-2" style="margin-top: 0;">
+        <div>
+          <p style="margin: 0; font-size: 13px;">
+            <strong>Archetype:</strong> The Event Seeker<br>
+            <strong>Context:</strong> ACGN fan who attends 2–4 conventions per year but regularly
+            misses smaller community events due to poor discoverability.
+          </p>
+        </div>
+        <div>
+          <h4>Goals</h4>
+          <ul style="font-size: 13px;">
+            <li>Keep up with conventions and smaller ACGN happenings in Singapore</li>
+            <li>Purchase tickets conveniently without leaving the platform</li>
+            <li>Know what booths, artists, and guests will be at an event</li>
+            <li>Set reminders so they don't miss events they care about</li>
+            <li>Share upcoming events with friends easily</li>
+          </ul>
+          <h4 style="margin-top: 14px;">Pain Points</h4>
+          <ul style="font-size: 13px;">
+            <li>Information scattered across Instagram, Telegram, Facebook</li>
+            <li>Smaller events easy to miss without inside knowledge</li>
+            <li>No single place for full event details + ticket purchase</li>
+            <li>No reminder system for ACGN-specific events</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     3. KEY USER TASKS & WIREFRAMES
+════════════════════════════════════════════════════ -->
+<section id="tasks">
+  <div class="container">
+    <div class="section-label">03 · Key User Tasks & Design Process</div>
+    <h2>Task Flows & Wireframes</h2>
+    <p>CoNews covers <strong>5 key user tasks</strong> identified from user research and the refined MVP strategy.</p>
+
+    <!-- Task 1 -->
+    <h3 style="margin-top: 24px;">Task 1 — Discover &amp; Purchase Event Ticket</h3>
+    <p style="font-size: 13px;">
+      The primary entry-to-completion flow: user browses the CoNews feed, selects an event, views
+      full details, and purchases a ticket — all within PropBank.
+    </p>
+    <div class="task-flow">
+      <div class="task-step">CoNews Feed</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Select Event</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Event Detail Page</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Buy Ticket</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Payment</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Ticket Stored</div>
+    </div>
+
+    <!-- Wireframe Task 1 -->
+    <div style="margin-top: 12px;">
+      <img src="images/Task 1.png" alt="Task 1 — Discover & Purchase Event Ticket wireframe" style="width:60%; border-radius:8px; border:1px solid rgba(0,0,0,0.1); display:block; margin:0 auto;">
+    </div>
+
+    <!-- Design decision for Task 1 -->
+    <div class="card" style="margin-top: 16px;">
+      <h4>Design Decision — Task 1: Inline Ticket Purchase</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        The ticket purchase flow is handled <strong>entirely within PropBank</strong> rather than
+        redirecting to an external ticketing site. This decision was driven by the user research
+        finding that fragmented platforms are the core pain point — redirecting users out of the app
+        would recreate exactly the disconnected experience we are solving.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        The flow keeps payment details minimal and shows a clear confirmation with the ticket
+        automatically stored in the user's in-app Ticket Storage, so there is no friction in
+        retrieving it at the event venue.
+      </p>
+    </div>
+
+    <!-- Tasks 2–5 -->
+    <h3 style="margin-top: 32px;">Task 2 — Event Direction &amp; Event Layout Map</h3>
+    <div class="task-flow">
+      <div class="task-step">CoNews Feed</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Purchase Ticket</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">My Schedule</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Tap Direction → Google / Apple Maps</div>
+      <div class="task-arrow">·</div>
+      <div class="task-step">Tap Event Map → Booth Layout</div>
+    </div>
+    <div style="margin-top: 12px;">
+      <img src="images/Task 2.png" alt="Task 2 — Event Direction & Event Layout Map wireframe" style="width:60%; border-radius:8px; border:1px solid rgba(0,0,0,0.1); display:block; margin:0 auto;">
+    </div>
+    <div class="card" style="margin-top:10px;">
+      <h4>Design Decision — Direction &amp; Event Map Gated Behind Ticket Purchase</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        The <strong>Event Direction</strong> and <strong>Event Map</strong> features are only
+        surfaced after a user has purchased a ticket. Users who have not bought a ticket cannot
+        access these screens.
+      </p>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        <strong>Rationale — Separation of Concerns:</strong> The event detail page serves users
+        at the <em>decision</em> stage — they are evaluating whether to attend. Loading this page
+        with navigation and booth-layout tabs adds information that is entirely irrelevant until
+        the user has committed to going. Showing these prematurely creates visual noise and
+        cognitive overload without adding value.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        Once a ticket is purchased, the event moves into the user's <strong>My Schedule</strong>
+        page, where Direction and Event Map become available. This context switch is intentional:
+        the user is now in <em>preparation mode</em> rather than <em>discovery mode</em>, and the
+        information presented matches exactly what they need at that stage — making the app feel
+        purposeful and uncluttered.
+      </p>
+    </div>
+
+    <h3 style="margin-top: 28px;">Task 3 — Look for Guests &amp; Friends Associated with the Event</h3>
+    <div class="task-flow">
+      <div class="task-step">CoNews Feed</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Event Detail</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Tap Guests → View Influencers / Creators</div>
+      <div class="task-arrow">·</div>
+      <div class="task-step">Tap Participate → Filter by Friends → See Friends Attending</div>
+    </div>
+    <div style="margin-top: 12px;">
+      <img src="images/Task 3.png" alt="Task 3 — Look for Guests & Friends wireframe" style="width:60%; border-radius:8px; border:1px solid rgba(0,0,0,0.1); display:block; margin:0 auto;">
+    </div>
+    <div class="card" style="margin-top: 10px;">
+      <h4>Design Decision — Guests &amp; Friends Available Before Ticket Purchase</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        The <strong>Guests</strong> and <strong>Participate</strong> tabs are accessible directly
+        from the event detail page — no ticket required. Users can see which influencers, vTubers,
+        YouTubers, and content creators will be attending, and whether any of their PropBank friends
+        have also indicated they are going.
+      </p>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        <strong>Rationale:</strong> For many ACGN fans, the decision to attend an event is driven
+        by <em>who</em> is going — a favourite creator on the guest list or a friend's attendance
+        can be the deciding factor. Surfacing this information during the discovery phase, before
+        any purchase commitment, directly supports the user's decision-making process.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        This contrasts with Direction and Event Map, which are only unlocked post-purchase —
+        those are preparation tools, not decision tools. Keeping Guests and Participate always
+        visible ensures the event page remains a persuasive and informative browsing experience
+        without overwhelming the user with post-commitment logistics.
+      </p>
+    </div>
+
+    <h3 style="margin-top: 28px;">Task 4 — Share Event with PropBank Friends / Other Applications</h3>
+    <div class="task-flow">
+      <div class="task-step">CoNews Feed</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Event Detail</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Tap Share</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">PropBank Friend · WhatsApp · Telegram</div>
+    </div>
+    <div style="margin-top: 12px;">
+      <img src="images/Task 4.png" alt="Task 4 — Share Event wireframe" style="width:60%; border-radius:8px; border:1px solid rgba(0,0,0,0.1); display:block; margin:0 auto;">
+    </div>
+    <div class="card" style="margin-top: 10px;">
+      <h4>Design Decision — Share Available Before Ticket Purchase</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        The <strong>Share</strong> function is accessible from the event detail page without
+        requiring a ticket purchase. Users can share directly to PropBank friends or to external
+        applications such as WhatsApp and Telegram.
+      </p>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        <strong>Rationale — Social Communication as a Decision Tool:</strong> Attending an ACGN
+        event is often a group activity. A user who discovers an interesting event may want to
+        consult friends before committing to a purchase. Making Share available pre-purchase
+        enables this natural social flow — the user can forward the event, discuss it with friends,
+        and collectively decide to go, rather than having to buy a ticket first before being able
+        to share it.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        This positions Share as both a <em>communication tool</em> and a <em>conversion driver</em>
+        — a shared event link can bring new users into CoNews while also helping the original user
+        make a more confident purchase decision alongside their social circle.
+      </p>
+    </div>
+
+    <h3 style="margin-top: 28px;">Task 5 — View Purchase Ticket &amp; Set Reminder</h3>
+    <div class="task-flow">
+      <div class="task-step" style="border-color: rgba(79,142,247,.5);">Ticket Purchased ✓</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Hamburger Menu</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">My Schedule</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">Upcoming Event</div>
+      <div class="task-arrow">→</div>
+      <div class="task-step">View Ticket · Set Reminder</div>
+    </div>
+    <div style="margin-top: 12px;">
+      <img src="images/Task 5.png" alt="Task 5 — View Purchase Ticket & Set Reminder wireframe" style="width:60%; border-radius:8px; border:1px solid rgba(0,0,0,0.1); display:block; margin:0 auto;">
+    </div>
+    <div class="card" style="margin-top: 10px;">
+      <h4>Design Decision — Ticket &amp; Reminder Centralised in My Schedule (Post-Purchase Only)</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        <strong>View Ticket</strong> and <strong>Set Reminder</strong> are only accessible after
+        a ticket has been purchased. They are not exposed on the event detail page — instead, they
+        live inside <strong>My Schedule</strong>, reached via the hamburger menu.
+      </p>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        <strong>Rationale — Centralised Post-Purchase Hub:</strong> Once a user has committed to
+        an event, their needs shift entirely to preparation and logistics. My Schedule acts as a
+        single, dedicated space for all post-purchase activities — viewing the ticket, setting a
+        reminder, checking directions, and viewing the event map. Grouping these together means
+        users always know where to go after buying, reducing navigation friction and keeping the
+        main event browsing experience uncluttered.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        Placing Ticket and Reminder behind a purchase gate also keeps them meaningful — a reminder
+        for an event you have not committed to attending has no practical value, and displaying a
+        ticket that does not exist would be confusing. The gate ensures every item in My Schedule
+        is actionable and relevant.
+      </p>
+    </div>
+
+    <!-- Lo-fi → Hi-fi iteration evidence -->
+    <div id="prototype" class="section-label" style="margin-top: 36px;">04 · Prototype</div>
+    <h2>Design Iteration: Lo-Fi → Hi-Fi</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">1</div>
+        <div class="timeline-content">
+          <h4>Lo-Fi Wireframes</h4>
+          <p style="font-size: 13px; margin-bottom: 10px;">
+            Initial wireframes focused on the core 3-screen flow: event listing → event detail →
+            ticket purchase. Key decisions explored at this stage: filter bar placement, which
+            action buttons to show on the event detail page, and the payment screen layout.
+          </p>
+          <div style="border-radius: var(--radius); overflow: hidden; margin-bottom: 8px;">
+            <iframe style="border: 1px solid rgba(79,142,247,0.2); border-radius: var(--radius);" width="100%" height="350" src="https://embed.figma.com/design/Rb3NBiOCgCPaXdcylqQa3L/Propbank-playground?node-id=1191-1318&embed-host=share" allowfullscreen></iframe>
+          </div>
+          <a href="https://www.figma.com/design/Rb3NBiOCgCPaXdcylqQa3L/Propbank-playground?node-id=1191-1318" target="_blank" style="font-size: 12px;">View Lo-Fi Wireframe in Figma ↗</a>
+          <h4 style="margin-top: 12px;">Key Changes from Lo-Fi → Hi-Fi</h4>
+          <ul style="font-size: 13px; margin: 8px 0 0 0;">
+            <li style="margin-bottom: 8px;">
+              <strong>Direction &amp; Event Map gated behind ticket purchase.</strong>
+              In the lo-fi, both features were accessible directly from the event detail page
+              without any purchase requirement. After reviewing the design rationale, these were
+              removed from the event detail page in the hi-fi and relocated to <strong>My
+              Schedule</strong> — only appearing once the user has bought a ticket. This enforces
+              the separation between pre-purchase decision-making and post-purchase preparation.
+            </li>
+            <li>
+              <strong>Added onboarding and authentication screens.</strong>
+              The hi-fi introduced a <strong>Landing Page</strong>, <strong>Login</strong>,
+              <strong>Register</strong>, and <strong>Forgot Password</strong> screens. These are
+              shared utility screens used across all PropBank services and were designed and owned
+              by Xiao Ao as part of the group's shared infrastructure.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">2</div>
+        <div class="timeline-content">
+          <h4>MS2 Feedback &amp; Iteration</h4>
+          <p style="font-size: 13px; margin-bottom: 10px;">
+            The TA raised two key issues with the lo-fi wireframes during the MS2 review:
+          </p>
+          <ul style="font-size: 13px; margin: 0 0 12px 0;">
+            <li style="margin-bottom: 8px;">
+              <strong>Information overload on the event page.</strong> The event detail page had
+              too many buttons and too much text — including button labels that spelled out
+              descriptions which were unnecessary. The lo-fi felt cluttered and overwhelming
+              rather than focused.
+            </li>
+            <li>
+              <strong>Unclear pre- vs post-purchase user journey.</strong> The TA questioned what
+              actions a user could take before buying a ticket versus after — the lo-fi did not
+              make this distinction clear, with features like Direction and Event Map shown
+              regardless of purchase state.
+            </li>
+          </ul>
+          <p style="font-size: 13px; margin: 0;">
+            <strong>Response:</strong> These two points directly shaped the hi-fi design. The
+            event detail page was simplified — verbose button labels were removed and the layout
+            was cleaned up. More importantly, a clear <strong>pre-purchase vs post-purchase
+            workflow</strong> was established: Guests, Participate, and Share remain accessible
+            before buying (decision-making tools), while Direction, Event Map, View Ticket, and
+            Set Reminder are locked behind purchase and centralised in <strong>My
+            Schedule</strong> (preparation tools). This split directly addresses the TA's
+            question and gives the app a more purposeful, uncluttered structure.
+          </p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">3</div>
+        <div class="timeline-content">
+          <h4>Hi-Fidelity Prototype</h4>
+          <p style="font-size: 13px; margin-bottom: 8px;">
+            The hi-fi prototype applies PropBank's shared design system (typography, colour tokens,
+            navigation patterns) while reflecting CoNews-specific interaction needs.
+          </p>
+          <div style="border-radius: var(--radius); overflow: hidden; margin-top: 10px;">
+            <iframe style="border: 1px solid rgba(79,142,247,0.2); border-radius: var(--radius);" width="100%" height="420" src="https://embed.figma.com/proto/Rb3NBiOCgCPaXdcylqQa3L/Propbank-playground?node-id=426-416&p=f&scaling=scale-down&content-scaling=fixed&page-id=97%3A307&starting-point-node-id=426%3A416&embed-host=share" allowfullscreen></iframe>
+          </div>
+          <a href="https://www.figma.com/proto/Rb3NBiOCgCPaXdcylqQa3L/Propbank-playground?node-id=426-416&p=f&scaling=scale-down&content-scaling=fixed&page-id=97%3A307&starting-point-node-id=426%3A416" target="_blank" style="font-size: 12px; margin-top: 6px; display: inline-block;">View Hi-Fi Prototype in Figma ↗</a>
+
+          <!-- Key screens gallery -->
+          <h4 style="margin-top: 20px;">Key Screens</h4>
+          <div class="grid-3" style="margin-top: 10px;">
+            <div style="text-align: center;">
+              <div style="height:360px; border-radius:8px; border:1px solid rgba(0,0,0,0.1); overflow:hidden; margin-bottom:6px;">
+                <img src="images/CoNews Main page.png" alt="CoNews Main Page" style="width:100%; height:100%; object-fit:cover; object-position:top;">
+              </div>
+              <div style="font-size:12px; color: var(--muted);">CoNews Feed</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="height:360px; border-radius:8px; border:1px solid rgba(0,0,0,0.1); overflow:hidden; margin-bottom:6px;">
+                <img src="images/Event detail page.png" alt="Event Detail Page" style="width:100%; height:100%; object-fit:cover; object-position:top;">
+              </div>
+              <div style="font-size:12px; color: var(--muted);">Event Detail Page</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="height:360px; border-radius:8px; border:1px solid rgba(0,0,0,0.1); overflow:hidden; margin-bottom:6px;">
+                <img src="images/Ticket Purchase Page.png" alt="Ticket Purchase Page" style="width:100%; height:100%; object-fit:cover; object-position:top;">
+              </div>
+              <div style="font-size:12px; color: var(--muted);">Ticket Purchase</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="height:360px; border-radius:8px; border:1px solid rgba(0,0,0,0.1); overflow:hidden; margin-bottom:6px;">
+                <img src="images/My Coming Schdule Page.png" alt="My Upcoming Schedule Page" style="width:100%; height:100%; object-fit:cover; object-position:top;">
+              </div>
+              <div style="font-size:12px; color: var(--muted);">My Upcoming Schedule</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="height:360px; border-radius:8px; border:1px solid rgba(0,0,0,0.1); overflow:hidden; margin-bottom:6px;">
+                <img src="images/My Ticket Page.png" alt="My Ticket Page" style="width:100%; height:100%; object-fit:cover; object-position:top;">
+              </div>
+              <div style="font-size:12px; color: var(--muted);">My Ticket</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="height:360px; border-radius:8px; border:1px solid rgba(0,0,0,0.1); overflow:hidden; margin-bottom:6px;">
+                <img src="images/Set Reminder Page.png" alt="Set Reminder Page" style="width:100%; height:100%; object-fit:cover; object-position:top;">
+              </div>
+              <div style="font-size:12px; color: var(--muted);">Set Reminder</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     5. SERVICE INTEGRATION
+════════════════════════════════════════════════════ -->
+<section id="integration">
+  <div class="container">
+    <div class="section-label">05 · Ecosystem Integration</div>
+    <h2>How CoNews Fits in PropBank</h2>
+    <p>
+      CoNews is <strong>Priority 1</strong> in the PropBank MVP — it is the primary entry point for
+      new users discovering the ACGN community. Its integration with other services ensures that
+      interest sparked by an event naturally flows into the rest of the ecosystem.
+    </p>
+
+    <!-- Entry/Exit Points -->
+    <h3 style="margin-top: 24px;">Entry &amp; Exit Points</h3>
+    <div class="card">
+      <h4>Entry into CoNews</h4>
+      <ul style="font-size: 13px; margin-bottom: 14px;">
+        <li>Via the shared <strong>bottom navigation bar</strong> (CoNews icon) from anywhere in PropBank</li>
+        <li>From <strong>CreatorHub</strong> — a search page in CreatorHub that links directly to the event's CoNews page</li>
+        <li>From the <strong>PropBank landing page</strong> — featured CoNews section</li>
+      </ul>
+      <h4>Exit from CoNews</h4>
+      <ul style="font-size: 13px;">
+        <li>After ticket purchase — user is directed to <strong>My Schedule</strong> (accessible via the sidebar) to manage their upcoming event</li>
+        <li>Sharing an event with a PropBank friend navigates the user to the <strong>PropBank messaging page</strong> to continue the conversation</li>
+        <li>Via the shared <strong>bottom navigation bar</strong> to navigate to other PropBank services</li>
+      </ul>
+    </div>
+
+    <!-- Cross-service flows -->
+    <h3 style="margin-top: 24px;">Cross-Service Flows</h3>
+    <div class="card">
+      <div class="integration-row">
+        <div class="int-from">PropBank Landing Page</div>
+        <div class="int-arrow">→</div>
+        <div class="int-to">CoNews</div>
+        <div class="int-desc">The featured CoNews section on the PropBank landing page surfaces upcoming ACGN events, drawing users directly into CoNews to explore and purchase tickets</div>
+      </div>
+      <div class="integration-row">
+        <div class="int-from">CreatorHub</div>
+        <div class="int-arrow">→</div>
+        <div class="int-to">CoNews</div>
+        <div class="int-desc">A search page in CreatorHub surfaces related ACGN events, linking users directly to the corresponding CoNews event page</div>
+      </div>
+      <div class="integration-row">
+        <div class="int-from">CoNews</div>
+        <div class="int-arrow">→</div>
+        <div class="int-to">My Schedule</div>
+        <div class="int-desc">After purchasing a ticket, the user is directed to My Schedule (via the sidebar) where they can view their ticket, set reminders, and access event direction and layout map</div>
+      </div>
+      <div class="integration-row">
+        <div class="int-from">CoNews</div>
+        <div class="int-arrow">→</div>
+        <div class="int-to">PropBank Messaging</div>
+        <div class="int-desc">Sharing an event with a PropBank friend routes the user to the PropBank messaging page, enabling social coordination before committing to a ticket purchase</div>
+      </div>
+    </div>
+
+    <!-- Conflicts -->
+    <h3 style="margin-top: 24px;">Design Conflicts &amp; How They Were Resolved</h3>
+    <div class="card" style="margin-bottom: 12px;">
+      <h4>Conflict 1 — Event Page Information Overload</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        <strong>Conflict:</strong> The initial lo-fi design placed all event-related features —
+        Guests, Participate, Share, Direction, Event Map, and Buy Ticket — on a single event
+        detail page. This created a cluttered interface with too many tabs and buttons competing
+        for the user's attention, making it unclear what the primary action was.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        <strong>Resolution:</strong> Features were split into two distinct phases based on user
+        intent. Pre-purchase features (Guests, Participate, Share) that help the user
+        <em>decide</em> to attend were kept on the event detail page. Post-purchase features
+        (Direction, Event Map, View Ticket, Set Reminder) that help the user <em>prepare</em>
+        for the event were moved to My Schedule, only surfacing after a ticket is purchased.
+        This reduced visual clutter and gave each screen a clear, focused purpose.
+      </p>
+    </div>
+    <div class="card" style="margin-bottom: 12px;">
+      <h4>Conflict 2 — Inline Ticket Purchase vs External Redirect</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        <strong>Conflict:</strong> ACGN events in Singapore often sell tickets through third-party
+        platforms (e.g. Eventbrite, SISTIC). An early consideration was whether CoNews should
+        simply link out to these platforms rather than handling the purchase flow natively,
+        which would reduce development scope but break the in-app experience.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        <strong>Resolution:</strong> The ticket purchase was kept entirely within PropBank.
+        Redirecting users to an external site would interrupt the flow, require re-authentication,
+        and prevent the app from knowing whether a purchase occurred — making post-purchase
+        features like My Schedule and Set Reminder impossible to trigger. An inline purchase
+        flow was the only way to maintain a coherent pre-to-post-purchase journey.
+      </p>
+    </div>
+    <div class="card" style="margin-bottom: 12px;">
+      <h4>Conflict 3 — Share as Pre-Purchase vs Post-Purchase Feature</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        <strong>Conflict:</strong> There was a question of whether the Share function should be
+        locked behind ticket purchase — similar to Direction and Event Map — to keep the event
+        page minimal. Sharing an event you have not committed to attending could be seen as
+        premature.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        <strong>Resolution:</strong> Share was deliberately kept pre-purchase because it serves
+        a fundamentally different purpose — it is a <em>social decision-making tool</em>, not a
+        post-commitment utility. Users often want to share an event with friends to discuss
+        whether to attend together before anyone buys a ticket. Locking Share behind purchase
+        would break this natural group coordination behaviour and reduce the likelihood of
+        conversion altogether.
+      </p>
+    </div>
+    <div class="card">
+      <h4>Conflict 4 — My Schedule Navigation: Sidebar vs Bottom Navigation Bar</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        <strong>Conflict:</strong> PropBank uses a shared bottom navigation bar for primary
+        service switching. My Schedule is a personal hub rather than a top-level service, so
+        placing it in the bottom nav would give it equal prominence to CoNews, CreatorHub, and
+        Marketplace — which was inconsistent with its secondary, post-purchase nature.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        <strong>Resolution:</strong> My Schedule was placed in the <strong>sidebar</strong>
+        (accessed via the hamburger menu), keeping the bottom navigation bar reserved for
+        primary service discovery. This preserves the information hierarchy — users browse and
+        discover through the bottom nav, and manage their personal commitments through the
+        sidebar — without cluttering the main navigation with a screen that is only relevant
+        after a purchase has been made.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     6. AI-DRIVEN FEATURE
+════════════════════════════════════════════════════ -->
+<section id="ai">
+  <div class="container">
+    <div class="section-label">06 · AI-Driven Feature</div>
+    <h2>AI Feature Design</h2>
+
+    <div class="ai-card">
+      <h3 style="color: var(--accent2); margin-bottom: 8px;">Friend-Based Event Surfacing</h3>
+      <p style="font-size: 14px;">
+        CoNews uses AI to populate the <strong>Featured</strong> section with events that the
+        user's followed friends are attending. When a friend marks their participation in an event,
+        the AI surfaces that event in the user's Featured tab — giving users a quick, social-driven
+        view of what is happening in their circle.
+      </p>
+
+      <div class="grid-2" style="margin-top: 16px;">
+        <div>
+          <h4>What the AI does</h4>
+          <p style="font-size: 13px; margin-bottom: 8px;">
+            <strong>Current implementation:</strong> The AI monitors the <strong>Participate</strong>
+            activity of friends the user follows within PropBank. When a friend indicates they are
+            attending an event, that event is automatically promoted into the user's Featured section.
+            Each Featured event card shows a label indicating which friend is attending — represented
+            as <em>"Your friend is attending"</em> in the current hi-fi prototype, and personalised
+            to the specific friend's name (e.g. <em>"Alex is attending"</em>) in the full AI implementation.
+          </p>
+          <p style="font-size: 13px; margin-bottom: 8px;">
+            <strong>Further AI implementation:</strong>
+          </p>
+          <ul style="font-size: 13px; margin: 0;">
+            <li style="margin-bottom: 6px;"><strong>Followed guest monitoring</strong> — if the user follows a guest (influencer, vTuber, content creator) and that guest is listed as attending an event, the AI surfaces that event in Featured with a label such as <em>"[Guest Name] is appearing at this event"</em></li>
+            <li style="margin-bottom: 6px;"><strong>Past event purchase history</strong> — the AI analyses the user's past attended events (visible in the Past Schedule tab in My Schedule) to identify preferred event types and recommend similar upcoming events</li>
+          </ul>
+        </div>
+        <div>
+          <h4>User control &amp; override</h4>
+          <ul style="font-size: 13px; margin-bottom: 14px;">
+            <li>Users can <strong>turn off friend-based suggestions</strong> from CoNews settings, reverting the Featured section to a general curated listing</li>
+            <li>The Featured strip is collapsible — users who prefer to browse without social influence can hide it entirely</li>
+          </ul>
+
+          <h4>Why this feature</h4>
+          <p style="font-size:13px; margin: 0;">
+            User research showed that a key motivation for attending ACGN events is knowing that
+            friends or community members will be there. Rather than making users manually check
+            each friend's profile, the AI aggregates this social signal passively and surfaces it
+            in one place — reducing the effort needed to make a socially-informed event decision.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI in design process -->
+    <h3 style="margin-top: 28px;">AI Tools Used in Design Process</h3>
+    <div class="card" style="margin-bottom: 12px;">
+      <h4>Google Gemini — Idea Evaluation for CoNews Service</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        Early in the design process, I provided Gemini with the concept of the PropBank super-app
+        and presented multiple feature ideas for CoNews. I asked Gemini to evaluate each idea —
+        identifying what was strong and what had potential weaknesses — grounded in our group's
+        own problem statement and user interview findings.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        AI acted as a sounding board to pressure-test ideas before committing to them in the
+        wireframe. The final decisions on which features to include remained mine, informed by
+        both the AI feedback and the qualitative insights from our own research.
+      </p>
+    </div>
+    <div class="card" style="margin-bottom: 12px;">
+      <h4>Google Gemini — Icon &amp; Image Generation for PropBank Landing Page</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        I provided Gemini with the concept of each of PropBank's 5 services and my visual
+        requirements, then asked it to generate suitable icons and images for the landing page.
+        The landing page is the first screen users see after entering PropBank — its purpose is
+        to give users an immediate understanding of each service so they can navigate directly
+        to what they need.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        The AI-generated visuals were reviewed and selected based on how well they communicated
+        each service's identity. Final curation and placement decisions were made by me.
+      </p>
+    </div>
+    <div class="card" style="margin-bottom: 12px;">
+      <h4>Google Gemini — Figma Interaction Guidance</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        When building interactions within the Figma prototype, I described the interaction I
+        wanted to achieve to Gemini and asked it to walk me through the step-by-step process
+        to implement it in Figma. This allowed me to learn specific prototyping techniques
+        efficiently without needing to search through documentation manually.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        I retained full control over the design decisions — AI was used purely as a technical
+        guide on how to execute what I had already decided to build.
+      </p>
+    </div>
+    <div class="card">
+      <h4>Claude Code — Portfolio Development</h4>
+      <p style="font-size: 13px; margin-bottom: 6px;">
+        Claude Code was used to assist in building and updating this portfolio website. I
+        directed Claude Code on what content to include, how it should be structured, and what
+        changes to make — based on my own understanding of the project and the work completed
+        throughout the module.
+      </p>
+      <p style="font-size: 13px; margin: 0;">
+        Claude Code handled the repetitive and tedious implementation work, while I remained
+        in charge of all content decisions — what information to input, how it is framed, and
+        whether the output accurately reflected my design intent. All written content reflects
+        my own understanding of the design rationale and project context.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     7. REFLECTION
+════════════════════════════════════════════════════ -->
+<section id="reflection">
+  <div class="container">
+    <div class="section-label">07 · Reflection</div>
+    <h2>Design Process Reflection</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Individual Contributions &amp; AI-Driven Feature</h3>
+        <p style="font-size: 13px; margin-bottom: 12px;">
+          As the member responsible for CoNews and several shared PropBank screens, my individual
+          contributions spanned both service-specific design and group-level shared utilities.
+        </p>
+        <ul style="font-size: 13px; margin-bottom: 12px;">
+          <li style="margin-bottom: 8px;">
+            <strong>CoNews Service</strong> — designed the full CoNews experience including the
+            event feed, event detail page, ticket purchase flow, and all 5 task flows. Established
+            the pre-purchase vs post-purchase feature split based on MS2 tutor feedback, and
+            designed the AI-driven Featured section that surfaces events attended by the user's
+            PropBank friends.
+          </li>
+          <li style="margin-bottom: 8px;">
+            <strong>Login, Register &amp; Forgot Password pages</strong> — designed the
+            onboarding and authentication screens shared across all PropBank services, ensuring
+            a consistent entry experience for new and returning users.
+          </li>
+          <li style="margin-bottom: 8px;">
+            <strong>PropBank Landing Page</strong> — designed the landing page that greets users
+            on first entry, presenting all 5 PropBank services with AI-generated icons so users
+            can immediately understand each service and navigate to their intended destination.
+          </li>
+          <li style="margin-bottom: 8px;">
+            <strong>Sidebar — My Schedule Page</strong> — designed the centralised post-purchase
+            hub accessible via the sidebar hamburger menu, comprising My Upcoming Schedule (with
+            Ticket, Reminder, Direction, and Event Map for each event) and My Past Schedule
+            (a full history of events the user has attended, used as a signal for future AI
+            recommendations).
+          </li>
+          <li>
+            <strong>Inbox</strong> — designed the in-app inbox that sends users a confirmation
+            message upon successful ticket purchase, providing a receipt and event summary within
+            PropBank without relying on external email.
+          </li>
+        </ul>
+        <p style="font-size: 13px; margin: 0;">
+          The AI-driven feature — friend-based event surfacing in the Featured section — was
+          designed and owned by me as part of the CoNews service, with a roadmap for further AI
+          signals (followed guests, past event history) documented for future implementation.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Trade-offs &amp; Challenges</h3>
+        <p style="font-size: 13px; margin-bottom: 10px;">
+          <strong>Direction &amp; Map: gated vs always-on</strong>
+        </p>
+        <p style="font-size: 13px; margin-bottom: 10px;">
+          Initially, all event page features — including Direction and Event Map — were designed
+          to be permanently accessible. After reflection and MS2 feedback, I decided to gate these behind ticket
+          purchase. The trade-off: a user who wants to plan travel before committing cannot access
+          the directions, but this was accepted because:
+        </p>
+        <ul style="font-size: 13px; margin-bottom: 10px;">
+          <li>The venue name and address remain always visible on the event detail page — enough for pre-purchase planning</li>
+          <li>Turn-by-turn directions and booth maps are only meaningful once you are committed to going</li>
+          <li>Keeping the event detail page clean during the decision phase reduces cognitive load</li>
+        </ul>
+        <p style="font-size: 13px; margin-bottom: 16px;">
+          Features that help users <em>decide</em> whether to attend (Guests, Participants, Share)
+          are always accessible. Features that help users <em>get there</em> are unlocked after purchase.
+          This mirrors how real-world event tickets work — you get logistics details in your confirmation email,
+          not on the event poster.
+        </p>
+        <p style="font-size: 13px; margin-bottom: 10px;">
+          <strong>First-time UI/UX designer — learning curve with tools</strong>
+        </p>
+        <p style="font-size: 13px; margin-bottom: 10px;">
+          CS3240 is my first UI/UX design course. Coming in with no prior design experience,
+          learning Figma and Maze from scratch while simultaneously producing deliverables at
+          each milestone was one of the biggest challenges throughout the project.
+        </p>
+        <p style="font-size: 13px; margin: 0;">
+          My approach was to keep learning incrementally — searching YouTube tutorials for
+          specific Figma techniques, asking AI (Google Gemini) to walk me through step-by-step
+          interactions I wanted to prototype, and applying what I learned immediately to the
+          project. It was challenging, but building the skills in the context of a real design
+          problem made the learning stick more than following tutorials in isolation.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     8. LINKS
+════════════════════════════════════════════════════ -->
+<section id="links" style="border-bottom: none;">
+  <div class="container">
+    <div class="section-label">08 · Links</div>
+    <h2>Project Links</h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top: 20px;">
+      <div class="card">
+        <h4 style="color: var(--accent2);">CoNews - User Journey Map</h4>
+        <p style="font-size:13px; margin-bottom: 12px;">CoNews event seeker journey on FigJam</p>
+        <a class="btn btn-primary" href="https://www.figma.com/board/DJ6j2odtzl0O2O6jIWjYoe/CS3240-user-journey-map?node-id=2206-652&t=wIiZNdsfon4ZfpDW-1" target="_blank" style="font-size:13px;">Open FigJam ↗</a>
+      </div>
+      <div class="card">
+        <h4 style="color: var(--accent2);">CoNews - 5 Task Workflows</h4>
+        <p style="font-size:13px; margin-bottom: 12px;">All 5 CoNews task flow diagrams in Figma</p>
+        <a class="btn btn-primary" href="https://www.figma.com/design/Rb3NBiOCgCPaXdcylqQa3L/Propbank-playground?node-id=555-592&t=a5x4HMmqf8CdYjSk-1" target="_blank" style="font-size:13px;">Open in Figma ↗</a>
+      </div>
+      <div class="card">
+        <h4 style="color: var(--accent2);">CoNews - Lo-Fi Prototype</h4>
+        <p style="font-size:13px; margin-bottom: 12px;">CoNews lo-fidelity wireframes in Figma</p>
+        <a class="btn btn-primary" href="https://www.figma.com/design/Rb3NBiOCgCPaXdcylqQa3L/Propbank-playground?node-id=1191-1318" target="_blank" style="font-size:13px;">Open in Figma ↗</a>
+      </div>
+      <div class="card">
+        <h4 style="color: var(--accent2);">CoNews - Hi-Fi Prototype</h4>
+        <p style="font-size:13px; margin-bottom: 12px;">Interactive Figma prototype for CoNews</p>
+        <a class="btn btn-primary" href="https://www.figma.com/proto/Rb3NBiOCgCPaXdcylqQa3L/Propbank-playground?node-id=426-416&p=f&scaling=scale-down&content-scaling=fixed&page-id=97%3A307&starting-point-node-id=426%3A416" target="_blank" style="font-size:13px;">Open in Figma ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════ -->
+<footer>
+  <div>
+    <strong style="color: var(--text);">CoNews</strong> · Individual Portfolio ·
+    Xiao Ao · Group 11 · CS3240 S2 AY2526
+  </div>
+  <div style="margin-top: 8px; color: #4a5070; font-size: 12px;">
+    PropBank — ACGN Convention Preparation Super-app
+  </div>
+</footer>
+
+</body>
+</html>
