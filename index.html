@@ -13,20 +13,20 @@
       --card:      #22263a;
       --accent:    #4f8ef7;
       --accent2:   #38d9a9;
-      --text:      #e8eaf6;
-      --muted:     #8892b0;
+      --text:      #f0f2ff;
+      --muted:     #b0bcd8;
       --border:    #2e3350;
       --warn:      #ffd166;   /* placeholder highlight */
       --radius:    12px;
-      --max-w:     900px;
+      --max-w:     1100px;
     }
     html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       color: var(--text);
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      font-size: 15px;
-      line-height: 1.7;
+      font-size: 16px;
+      line-height: 1.75;
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -112,9 +112,9 @@
       font-size: 11px; font-weight: 700; letter-spacing: .12em;
       color: var(--accent2); text-transform: uppercase; margin-bottom: 10px;
     }
-    h2 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
-    h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; color: var(--accent); }
-    h4 { font-size: 14px; font-weight: 600; color: var(--accent2); margin-bottom: 4px; }
+    h2 { font-size: 30px; font-weight: 700; margin-bottom: 8px; }
+    h3 { font-size: 19px; font-weight: 600; margin-bottom: 6px; color: var(--accent); }
+    h4 { font-size: 15px; font-weight: 600; color: var(--accent2); margin-bottom: 4px; }
     p { color: var(--muted); margin-bottom: 12px; }
     p strong { color: var(--text); }
     ul, ol { padding-left: 20px; color: var(--muted); }
@@ -738,36 +738,102 @@
               </div>
               <div style="font-size:12px; color: var(--muted);">Set Reminder</div>
             </div>
+            <div style="text-align: center;">
+              <div style="border-radius:8px; border:1px solid rgba(0,0,0,0.1); margin-bottom:6px;">
+                <img src="images/Shared Page.png" alt="Event Share Page" style="width:100%; display:block;">
+              </div>
+              <div style="font-size:12px; color: var(--muted);">Event Share Page</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="border-radius:8px; border:1px solid rgba(0,0,0,0.1); margin-bottom:6px;">
+                <img src="images/SideBar.png" alt="Sidebar" style="width:100%; display:block;">
+              </div>
+              <div style="font-size:12px; color: var(--muted);">Sidebar</div>
+            </div>
           </div>
 
           <!-- Usability Testing -->
           <h4 style="margin-top: 24px;">Usability Testing</h4>
           <p style="font-size: 13px; margin: 8px 0 14px 0;">
-            A usability test was conducted using <strong>Maze</strong> to evaluate how easily
-            users can complete key CoNews tasks on the hi-fidelity prototype.
+            A usability test was conducted using <strong>Maze</strong> with <strong>8 participants</strong> to evaluate how easily
+            users can complete key CoNews tasks on the hi-fidelity prototype. All 4 tasks achieved a
+            <strong style="color: var(--accent2);">100% success rate</strong> with 0% drop-off, confirming that the core flows are learnable and navigable.
           </p>
-          <div class="grid-2" style="margin-top: 0;">
+
+          <!-- Results table -->
+          <div style="overflow-x: auto; margin: 16px 0;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <th style="text-align: left; padding: 8px 12px; color: var(--muted); font-weight: 600;">Task</th>
+                  <th style="text-align: center; padding: 8px 12px; color: var(--muted); font-weight: 600;">n</th>
+                  <th style="text-align: center; padding: 8px 12px; color: var(--muted); font-weight: 600;">Avg. Time</th>
+                  <th style="text-align: center; padding: 8px 12px; color: var(--muted); font-weight: 600;">Success</th>
+                  <th style="text-align: center; padding: 8px 12px; color: var(--muted); font-weight: 600;">Misclick</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 10px 12px;">Find, purchase a ticket, then view ticket in My Schedule</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--muted);">8</td>
+                  <td style="text-align: center; padding: 10px 12px;">26.7s</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--accent2); font-weight: 700;">100%</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--warn);">23.1%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 10px 12px;">Find, purchase a ticket, then set reminder in My Schedule</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--muted);">5</td>
+                  <td style="text-align: center; padding: 10px 12px;">21.9s</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--accent2); font-weight: 700;">100%</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--warn);">22.5%</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 10px 12px;">Look for the Guests page on an event</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--muted);">5</td>
+                  <td style="text-align: center; padding: 10px 12px;">13.9s</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--accent2); font-weight: 700;">100%</td>
+                  <td style="text-align: center; padding: 10px 12px; color: #ff6b6b; font-weight: 700;">36.0%</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 12px;">Look for the Participants page on an event</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--muted);">4</td>
+                  <td style="text-align: center; padding: 10px 12px;">3.5s</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--accent2); font-weight: 700;">100%</td>
+                  <td style="text-align: center; padding: 10px 12px; color: var(--accent2);">0.0%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Analysis -->
+          <h4 style="margin-top: 28px;">Key Findings</h4>
+          <div class="grid-2" style="margin-top: 12px;">
             <div class="card">
-              <h4>Task 1</h4>
-              <p style="font-size: 13px; margin-bottom: 4px;"><strong>Find, purchase a ticket, then view your ticket in My Schedule</strong></p>
-              <p style="font-size: 13px; margin: 0; color: var(--muted);">Tests the primary end-to-end flow from browsing to post-purchase ticket retrieval</p>
+              <h4 style="color: var(--accent2); margin-bottom: 8px;">Purchase & Schedule Flow (Tasks 1–2)</h4>
+              <p style="font-size: 13px; margin: 0; color: var(--muted);">
+                Both tasks succeeded with 100% completion and similar misclick rates (~23%). Task 1 took longer (26.7s vs 21.9s) as it was participants' first exposure to the purchase flow. The consistent misclick rate across both tasks points to minor friction in the checkout or My Schedule navigation — likely users exploring tabs before finding the right action — rather than a fundamental usability issue.
+              </p>
             </div>
             <div class="card">
-              <h4>Task 2</h4>
-              <p style="font-size: 13px; margin-bottom: 4px;"><strong>Find, purchase a ticket, then set a reminder in My Schedule</strong></p>
-              <p style="font-size: 13px; margin: 0; color: var(--muted);">Tests the post-purchase reminder flow and My Schedule navigation</p>
+              <h4 style="color: var(--warn); margin-bottom: 8px;">Guests Page Discoverability (Task 3)</h4>
+              <p style="font-size: 13px; margin: 0; color: var(--muted);">
+                The Guests page had the highest misclick rate at 36%, indicating that users did not immediately know which tab or element to tap on the event detail page. Despite the exploration, all users eventually found it (100% success). This suggests the "Guests" label or its placement on the event page could be made more prominent to reduce scanning time.
+              </p>
             </div>
             <div class="card">
-              <h4>Task 3</h4>
-              <p style="font-size: 13px; margin-bottom: 4px;"><strong>Look for the Guests page on an event</strong></p>
-              <p style="font-size: 13px; margin: 0; color: var(--muted);">Tests discoverability of the Guests feature on the event detail page</p>
+              <h4 style="color: var(--accent2); margin-bottom: 8px;">Participants Page (Task 4)</h4>
+              <p style="font-size: 13px; margin: 0; color: var(--muted);">
+                The fastest and most precise task — completed in 3.5s with 0% misclick rate. Having already navigated the event detail page in Task 3, users immediately knew where to look. This transfer of learning suggests the event page tab structure is consistent and easy to internalise once encountered.
+              </p>
             </div>
             <div class="card">
-              <h4>Task 4</h4>
-              <p style="font-size: 13px; margin-bottom: 4px;"><strong>Look for the Participate page on an event</strong></p>
-              <p style="font-size: 13px; margin: 0; color: var(--muted);">Tests discoverability of the Participate (friends attending) feature</p>
+              <h4 style="color: var(--accent2); margin-bottom: 8px;">Overall</h4>
+              <p style="font-size: 13px; margin: 0; color: var(--muted);">
+                Across all 4 tasks: 100% success rate and 0% drop-off. The prototype successfully supports core user goals. The main area for improvement is the <strong>discoverability of the Guests tab</strong> on the event detail page, which could be addressed by surfacing it higher in the tab order or using a more descriptive label.
+              </p>
             </div>
           </div>
+
           <div style="margin-top: 16px;">
             <a class="btn btn-primary" href="https://t.maze.co/521416871" target="_blank">Take the Usability Test on Maze ↗</a>
           </div>
